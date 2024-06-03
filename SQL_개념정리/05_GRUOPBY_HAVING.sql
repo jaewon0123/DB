@@ -105,3 +105,47 @@ DEPT_CODE   평균급여
 D5	        2626666
 D6	        3366666
 */
+
+-- 여러 컬럼을 묶어서 그룹으로 지정 가능
+
+-- GROUP BY 사용시 주의할 점
+
+--> SELECT문에 GROUP BY 절을 사용할 경우
+-- SELECT 절에 명시한 조회 컬럼중 그룹 함수가 적용되지 않은 컬럼은
+-- 모두 GROUP BY 절에 작성해야함
+
+-- EMPLOYEE 테이블에서 부서별로 같은 직급인 사원의 급여 합계를 조회하고
+-- 부서코드 오름차순으로 정렬
+
+SELECT DEPT_CODE, JOB_CODE,SUM(SALARY)
+FROM EMPLOYEE
+GROUP BY DEPT_CODE, JOB_CODE
+ORDER BY DEPT_CODE; -- ASC 생략
+
+/*
+EMPLOYEE 테이블에서 부서코드(DEPT_CODE) 직급코드(JOB_CODE)각 코드별로
+급여 합계 계산해서 그룹화 하고, 부서코드 순서대로 정렬
+D1	    J6	6440000
+D1	    J7	1380000
+D2	    J4	6520000
+D5	    J3	3500000
+D5	    J5	8460000
+D5	    J7	3800000
+D6	    J3	7300000
+D6	    J4	2800000
+D8	    J6	6986240
+D9	    J1	8000000
+D9	    J2	9700000
+NULL	J6	2320000
+NULL	J7	2890000
+
+예를들어 KH 테이블 존재 컬럼 T반 U반 존재
+
+T반 총 학생수가 궁금 어떤 학생수 성별 학생수
+
+SELECT T반, 성별, SUM(총학생수)
+FROM KH
+GROUP BY T반,성별
+ORDER BY 가나다순으로 정렬
+
+*/
